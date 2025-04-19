@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("C:/Users/numan/OneDrive/Desktop/ML Lab Programs/training_data.csv")
+df = pd.read_csv("ML Lab Programs/training_data.csv")
 
 attributes = df.columns[:-1]
 target_col = df.columns[-1]
