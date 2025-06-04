@@ -8,25 +8,20 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.metrics import confusion_matrix, classification_report
 
-# Load and scale data
 data = load_breast_cancer()
 X_scaled = StandardScaler().fit_transform(data.data)
 
-# Apply K-Means
 kmeans = KMeans(n_clusters=2, random_state=42)
 y_kmeans = kmeans.fit_predict(X_scaled)
 
-# Evaluation
 print("Confusion Matrix:\n", confusion_matrix(data.target, y_kmeans))
 print("\nClassification Report:\n", classification_report(data.target, y_kmeans))
 
-# PCA for visualization
 X_pca = PCA(n_components=2).fit_transform(X_scaled)
 df = pd.DataFrame(X_pca, columns=['PC1', 'PC2'])
 df['Cluster'] = y_kmeans
 df['True Label'] = data.target
 
-# Plot clusters
 def plot_clusters(title, hue, palette, centroids=False):
     plt.figure(figsize=(8, 6))
     sns.scatterplot(data=df, x='PC1', y='PC2', hue=hue, palette=palette, s=100, edgecolor='black', alpha=0.7)
